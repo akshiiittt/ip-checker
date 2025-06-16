@@ -1,0 +1,115 @@
+{
+  "info": {
+    "name": "IP Restrictions Microservice",
+    "_postman_id": "ip-restrictions-microservice",
+    "description": "Tests the IP restrictions microservice at http://localhost:3000/api/restrictions/check",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Test Whitelisted IP",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Forwarded-For",
+            "value": "192.168.1.1",
+            "description": "IP expected to be whitelisted"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/restrictions/check",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "restrictions", "check"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Test Blacklisted Country",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Forwarded-For",
+            "value": "172.16.0.1",
+            "description": "IP in US, expected to be blacklisted"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/restrictions/check",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "restrictions", "check"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Test Fallback to All",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Forwarded-For",
+            "value": "8.8.8.8",
+            "description": "IP with no specific rule, should fallback to all (whitelist)"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/restrictions/check",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "restrictions", "check"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Test Invalid IP",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Forwarded-For",
+            "value": "999.999.999.999",
+            "description": "Invalid IP, should return no restrictions"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/restrictions/check",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "restrictions", "check"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Test Disabled Rule",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Forwarded-For",
+            "value": "10.0.0.1",
+            "description": "IP with disabled blacklist rule, should fallback to all (whitelist)"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/restrictions/check",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "restrictions", "check"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

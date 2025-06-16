@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CATEGORIES {
+  whitelist
+  maintenance
+  blacklist
+  blocklogin
+}
+
+enum SCOPES {
+  continent
+  country
+  ip
+  ip_subnet
+  all
+}
+
+model restrictions {
+  id         BigInt     @id @default(autoincrement())
+  category   CATEGORIES
+  scope      SCOPES
+  value      String     @db.VarChar(64)
+  code       Int?
+  state      State      @default(enabled)
+  created_at DateTime   @default(now()) @map("created_at")
+  updated_at DateTime   @updatedAt @map("updated_at")
+
+  @@map("restrictions")
+}
+
+enum State {
+  enabled
+  disabled
+}

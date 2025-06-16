@@ -1,0 +1,58 @@
+# === General ===
+.DS_Store
+Thumbs.db
+.env
+.env.*  # env files (e.g. .env.local, .env.production)
+*.log
+node_modules/
+dist/
+build/
+coverage/
+
+# === Go (Gin) ===
+*.exe
+*.out
+*.test
+*.o
+*.a
+*.so
+*.dll
+*.mod
+*.sum
+vendor/
+
+# Go workspace files
+go.sum
+go.work.sum
+
+# Binary output
+/go-backend/*.exe
+/go-backend/*.out
+
+# === Node.js (Express + Prisma) ===
+/node-backend/node_modules/
+/node-backend/dist/
+/node-backend/build/
+/node-backend/.next/
+/node-backend/.turbo/
+
+# Prisma
+/prisma/node_modules/
+/prisma/.prisma/
+/prisma/dev.db
+/prisma/dev.db-journal
+
+# TypeScript
+*.tsbuildinfo
+
+# === OS and Editor files ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# === Docker artifacts (if using Docker) ===
+*.pid
+docker-compose.override.yml
+docker-compose.override.yaml
