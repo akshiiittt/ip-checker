@@ -56,3 +56,6 @@ go.work.sum
 *.pid
 docker-compose.override.yml
 docker-compose.override.yaml
+
+**/GeoLite2-City.mmdb
+
