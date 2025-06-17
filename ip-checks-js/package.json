@@ -6,7 +6,7 @@
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "migrate": "npx prisma migrate dev",
-    "seed": "ts-node seed.ts"
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -14,6 +14,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "geoip-lite": "^1.4.10",
+    "ip-address": "^10.0.1",
     "ip-cidr": "^3.1.0",
     "redis": "^4.7.1"
   },

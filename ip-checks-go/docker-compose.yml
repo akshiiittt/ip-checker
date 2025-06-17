@@ -1,24 +1,27 @@
 version: "3.8"
 services:
-  postgres:
+  db:
     image: postgres:15
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: app
+      POSTGRES_DB: restrictions_db
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    networks:
+      - app-network
 
   redis:
-    image: redis/redis-stack:latest
+    image: redis/redis-stack-server:latest
     ports:
       - "6379:6379"
       - "8001:8001"
-    volumes:
-      - redis_data:/data
+    networks:
+      - app-network
 
-volumes:
-  postgres_data:
-  redis_data:
+networks:
+  app-network:
+    driver: bridge
